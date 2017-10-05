@@ -4,7 +4,7 @@ const MaxLatitude = 85.05112878;
 const MinLongitude = -180;
 const MaxLongitude = 180;
 
-export const Clip = (number, minValue, maxValue) => {
+export const clip = (number, minValue, maxValue) => {
    return Math.min(Math.max(number, minValue), maxValue);
 }
 
@@ -13,7 +13,7 @@ export const mapSize = (levelOfDetail) => {
 }
 
 export const groundResolution = (latitude, levelOfDetail) => {
-    let newLatitude = Clip(latitude, MinLatitude, MaxLatitude);
+    let newLatitude = clip(latitude, MinLatitude, MaxLatitude);
     return Math.cos(latitude * Math.PI / 180) * 2 * Math.PI * EarthRadius / mapSize(levelOfDetail);
 }
 
