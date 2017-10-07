@@ -1,0 +1,4 @@
+## bingtilesystem
+
+Allows you to use tilesystem utilities to help retrieve lat longs, tile x/y coordinates, and pixel x/y coordinates from
+a quadkey.

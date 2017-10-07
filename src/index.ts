@@ -8,20 +8,20 @@ export const clip = (number:number, minValue:number, maxValue:number):number => 
    return Math.min(Math.max(number, minValue), maxValue);
 }
 
-export const mapSize = (levelOfDetail:number) => {
+export const mapSize = (levelOfDetail:number):number => {
     return 256 << levelOfDetail;
 }
 
-export const groundResolution = (latitude:number, levelOfDetail:number) => {
+export const groundResolution = (latitude:number, levelOfDetail:number):number => {
     let newLatitude = clip(latitude, MinLatitude, MaxLatitude);
     return Math.cos(latitude * Math.PI / 180) * 2 * Math.PI * EarthRadius / mapSize(levelOfDetail);
 }
 
-export const mapScale = (latitude:number, levelOfDetail:number, screenDpi:number) => {
+export const mapScale = (latitude:number, levelOfDetail:number, screenDpi:number):number => {
     return groundResolution(latitude, levelOfDetail) * screenDpi / 0.0254;
 }
 
-export const latLongToPixelXY = (latitude:number, longitude:number, levelOfDetail:number) => {
+export const latLongToPixelXY = (latitude:number, longitude:number, levelOfDetail:number): {pixelX:number, pixelY:number} => {
     let newLatitude = clip(latitude, MinLatitude, MaxLatitude);
     let newLongitude = clip(longitude, MinLongitude, MaxLongitude);
 
@@ -37,7 +37,7 @@ export const latLongToPixelXY = (latitude:number, longitude:number, levelOfDetai
     };
 }
 
-export const pixelXYtoLatLong = (pixelX:number, pixelY:number, levelOfDetail:number) => {
+export const pixelXYtoLatLong = (pixelX:number, pixelY:number, levelOfDetail:number): {latitude:number, longitude:number} => {
     let mapLodSize = mapSize(levelOfDetail);
     let x = (clip(pixelX, 0, mapLodSize - 1) / mapLodSize) - 0.5;
     let y = 0.5 - (clip(pixelY, 0, mapLodSize - 1) / mapLodSize);
@@ -51,7 +51,7 @@ export const pixelXYtoLatLong = (pixelX:number, pixelY:number, levelOfDetail:num
     };
 }
 
-export const pixelXYtoTileXY = (pixelX:number, pixelY:number) => {
+export const pixelXYtoTileXY = (pixelX:number, pixelY:number): {tileX: number, tileY:number} => {
     return {
         tileX: Math.floor(pixelX / 256),
         tileY: Math.floor(pixelY / 256)
@@ -86,7 +86,7 @@ export const tileXYToQuadKey = (tileX:number, tileY:number, levelOfDetail:number
     return quadKey;
 }
 
-export const quadKeyToTileXY = (quadKey:string) => {
+export const quadKeyToTileXY = (quadKey:string): {tileX:number, tileY:number, levelOfDetail:number} => {
     let tileX = 0, tileY = 0;
     let levelOfDetail = quadKey.length;
 
