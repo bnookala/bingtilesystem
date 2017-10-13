@@ -1,6 +1,6 @@
 {
   "name": "bingtilesystem",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": [
     "tiles",
     "maps",
@@ -9,6 +9,7 @@
   ],
   "description": "Tile system utils for Bing Maps",
   "main": "dist/src/index.js",
+  "typings": "types/src/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/bnookala/bingtilesystem.git"
